@@ -53,6 +53,6 @@ static ISolution GetSolution(int year, int day)
 static string GetSolutionName(ISolution solution)
 {
     return solution.GetType()
-        .GetCustomAttribute<AocSolutionAttribute>()
+        .GetCustomAttribute<AocPuzzleAttribute>()
         ?.Name ?? "";
 }
