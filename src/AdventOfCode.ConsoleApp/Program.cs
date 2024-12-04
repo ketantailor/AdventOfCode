@@ -37,7 +37,7 @@ static async Task MainImpl()
 
     var result = solution.Solve(input);
 
-    Log.Info($"Result: {result}");
+    Log.Info($"\tResult: {result}");
 
     Log.Info($"Completed in {stopwatch.ElapsedMilliseconds:n0}ms");
 }
