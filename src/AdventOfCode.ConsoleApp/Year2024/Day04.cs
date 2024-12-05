@@ -5,8 +5,11 @@ internal class Day04 : ISolution
 {
     public SolutionResult Solve(string input)
     {
-        var part1 = FindWords(input, "XMAS");
-        var part2 = 0;
+        var grid = ToCharArray(input);
+
+        var part1 = FindWords(grid, "XMAS");
+        var part2 = FindXmas(grid);
+        
         return new SolutionResult(part1.ToString(), part2.ToString());
     }
 
@@ -25,11 +28,13 @@ internal class Day04 : ISolution
             MXMXAXMASX
             """.Trim();
 
-        var searchText = "XMAS";
-        Console.WriteLine(FindWords(input, searchText));
+        var grid = ToCharArray(input);
+
+        Console.WriteLine(FindWords(grid, "XMAS"));
+        Console.WriteLine(FindXmas(grid));
     }
 
-    private static int FindWords(string input, string searchText)
+    private static char[,] ToCharArray(string input)
     {
         var lines = input
             .Split('\n')
@@ -52,7 +57,7 @@ internal class Day04 : ISolution
             }
         }
 
-        return FindWords(grid, searchText);
+        return grid;
     }
 
     private static int FindWords(char[,] grid, string searchText)
@@ -79,7 +84,7 @@ internal class Day04 : ISolution
                             var xc = x + i * dx;
                             var yc = y + i * dy;
 
-                            if (xc >= xmax || xc < 0 || yc >= ymax || yc < 0)
+                            if (xc < 0 || xc >= xmax || yc < 0 || yc >= ymax)
                             {
                                 found = false;
                                 break;
@@ -97,6 +102,37 @@ internal class Day04 : ISolution
                 }
             }
         }
+        return instances;
+    }
+
+    private static int FindXmas(char[,] grid)
+    {
+        var instances = 0;
+
+        var xmax = grid.GetLength(0);
+        var ymax = grid.GetLength(1);
+
+        for (var y = 1; y < ymax - 1; y++)
+        {
+            for (var x = 1; x < xmax - 1; x++)
+            {
+                if (grid[x, y] != 'A') continue;
+
+                var found1 = false;
+                var found2 = false;
+
+                if ((grid[x-1, y-1] == 'M' && grid[x + 1, y + 1] == 'S')
+                    || (grid[x - 1, y - 1] == 'S' && grid[x + 1, y + 1] == 'M'))
+                    found1 = true;
+
+                if ((grid[x - 1, y + 1] == 'M' && grid[x + 1, y - 1] == 'S')
+                    || (grid[x - 1, y + 1] == 'S' && grid[x + 1, y - 1] == 'M'))
+                    found2 = true;
+
+                if (found1 && found2) instances++;
+            }
+        }
+
         return instances;
     }
 }
