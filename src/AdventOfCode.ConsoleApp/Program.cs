@@ -25,29 +25,62 @@ static async Task MainImpl()
         return;
     }
 
-    var session = argsObj.Session ?? throw new ApplicationException("Session must be specified.");
-    var inputProvider = new InputProvider(session);
+    var inputProvider = BuildInputProvider();
 
-    var input = argsObj.Day > 0 ? await inputProvider.GetInput(argsObj.Year, argsObj.Day) : "";
-    var solution = GetSolution(argsObj.Year, argsObj.Day);
+    if (argsObj.Day == null)
+    {
+        await RunSolutions(inputProvider, argsObj.Year);
+    }
+    else
+    {
+        await RunSolution(inputProvider, argsObj.Year, argsObj.Day.Value);
+    }
+}
 
-    Log.Info($"{argsObj.Year:0000}.{argsObj.Day:00}: {GetSolutionName(solution)}");
+
+static async Task RunSolutions(InputProvider inputProvider, int year)
+{
+    try
+    {
+        for (var day = 0; day <= 24; day++)
+        {
+            await RunSolution(inputProvider, year, day);
+        }
+    }
+    catch (InvalidOperationException)
+    {
+        return;
+    }
+}
+
+static async Task RunSolution(InputProvider inputProvider, int year, int day)
+{
+    var solution = BuildSolution(year, day);
+    var input = day > 0 ? await inputProvider.GetInput(year, day) : "";
+
+    Log.Info($"{year:0000}.{day:00}: {GetSolutionName(solution)}", false);
 
     var stopwatch = Stopwatch.StartNew();
 
     var result = solution.Solve(input);
 
-    Log.Info($"\tResult: {result}");
-
-    Log.Info($"Completed in {stopwatch.ElapsedMilliseconds:n0}ms");
+    Log.Info($" --> Part1 = {result.Part1}, Part2 = {result.Part2} (completed in {stopwatch.ElapsedMilliseconds:n0}ms)");
 }
 
-static ISolution GetSolution(int year, int day)
+static ISolution BuildSolution(int year, int day)
 {
     var typeName = $"AdventOfCode.Year{year:0000}.Day{day:00}";
     var instance = typeof(Program).Assembly.CreateInstance(typeName) as ISolution
         ?? throw new InvalidOperationException($"Failed to create type: {typeName}.");
     return instance;
+}
+
+static InputProvider BuildInputProvider()
+{
+    var session = Environment.GetEnvironmentVariable("AOC_SESSION")
+        ?? throw new ApplicationException("The environment variable AOC_SESSION must be set.");
+    var inputProvider = new InputProvider(session);
+    return inputProvider;
 }
 
 static string GetSolutionName(ISolution solution)

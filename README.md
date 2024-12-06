@@ -7,3 +7,21 @@ This repo contains my solutions for the [Advent of Code](https://adventofcode.co
 ## Years
 
 - [![2024](https://img.shields.io/badge/2024-11_★-ffd700)](https://adventofcode.com/2024)
+
+## Usage
+
+Windows PowerShell:
+```powershell
+$Env:AOC_SESSION = "<session_token>"
+
+cd ~\Git\AdventOfCode
+dotnet run --project src/AdventOfCode.ConsoleApp -c release -- 2024
+```
+
+Linux Bash:
+```bash
+export AOC_SESSION="<session_token>"
+
+cd ~/Git/AdventOfCode
+dotnet run --project src/AdventOfCode.ConsoleApp -c release -- 2024
+```

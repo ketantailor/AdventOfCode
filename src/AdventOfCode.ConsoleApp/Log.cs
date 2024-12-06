@@ -2,9 +2,16 @@
 
 internal static class Log
 {
-    public static void Info(string? line = null)
+    public static void Info(string? line = null, bool newLine = true)
     {
-        Console.WriteLine(line ?? "");
+        if (newLine)
+        {
+            Console.WriteLine(line ?? "");
+        }
+        else
+        {
+            Console.Write(line ?? "");
+        }
     }
 
     public static void Debug(string line)
@@ -20,14 +27,6 @@ internal static class Log
     public static void Error(string line)
     {
         WriteLine(line, ConsoleColor.Red);
-    }
-
-    public static void Result(int year, int day, SolutionResult result)
-    {
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine($"{year:0000}.{day:00}");
-        Console.WriteLine($"\tPart 1: {result.Part1}");
-        Console.WriteLine($"\tPart 2: {result.Part2}");
     }
 
     private static void WriteLine(string line, ConsoleColor color)
