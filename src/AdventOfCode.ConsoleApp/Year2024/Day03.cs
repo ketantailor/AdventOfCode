@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Year2024;
 
-[AocPuzzle("Mull It Over")]
+[AocPuzzle("Mull It Over", Solution1 = "159833790", Solution2 = "89349241")]
 internal class Day03 : ISolution
 {
     public SolutionResult Solve(string input)

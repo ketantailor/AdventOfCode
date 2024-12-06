@@ -25,29 +25,101 @@ static async Task MainImpl()
         return;
     }
 
-    var session = argsObj.Session ?? throw new ApplicationException("Session must be specified.");
-    var inputProvider = new InputProvider(session);
+    var inputProvider = BuildInputProvider();
 
-    var input = argsObj.Day > 0 ? await inputProvider.GetInput(argsObj.Year, argsObj.Day) : "";
-    var solution = GetSolution(argsObj.Year, argsObj.Day);
+    if (argsObj.Day == null)
+    {
+        await RunSolutions(inputProvider, argsObj.Year, argsObj.Verify);
+    }
+    else
+    {
+        await RunSolution(inputProvider, argsObj.Year, argsObj.Day.Value, argsObj.Verify);
+    }
+}
 
-    Log.Info($"{argsObj.Year:0000}.{argsObj.Day:00}: {GetSolutionName(solution)}");
+
+static async Task RunSolutions(InputProvider inputProvider, int year, bool verify)
+{
+    try
+    {
+        for (var day = 0; day <= 24; day++)
+        {
+            await RunSolution(inputProvider, year, day, verify);
+        }
+    }
+    catch (InvalidOperationException)
+    {
+        // do nothing
+    }
+}
+
+static async Task RunSolution(InputProvider inputProvider, int year, int day, bool verify)
+{
+    var solution = BuildSolution(year, day);
+    var input = day > 0 ? await inputProvider.GetInput(year, day) : "";
+
+    Log.Info($"{year:0000}.{day:00}: {GetSolutionName(solution)}", false);
 
     var stopwatch = Stopwatch.StartNew();
 
     var result = solution.Solve(input);
 
-    Log.Info($"\tResult: {result}");
+    Log.Info($" --> Part1 = {result.Part1}, Part2 = {result.Part2} (completed in {stopwatch.ElapsedMilliseconds:n0}ms)", false);
+    Log.Info();
 
-    Log.Info($"Completed in {stopwatch.ElapsedMilliseconds:n0}ms");
+    if (verify)
+    {
+        var attr = solution.GetType().GetCustomAttribute<AocPuzzleAttribute>();
+        if (attr?.Solution1 != null)
+        {
+            Console.Write("\tPart1: ");
+            if (result.Part1 == attr.Solution1)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Passed");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Failed: expected = {attr.Solution1}, actual = {result.Part1}");
+                Console.ResetColor();
+            }
+        }
+        if (attr?.Solution2 != null)
+        {
+            Console.Write("\tPart2: ");
+            if (result.Part2 == attr.Solution2)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Passed");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Failed: expected = {attr.Solution2}, actual = {result.Part2}");
+                Console.ResetColor();
+            }
+        }
+    }
+
 }
 
-static ISolution GetSolution(int year, int day)
+static ISolution BuildSolution(int year, int day)
 {
     var typeName = $"AdventOfCode.Year{year:0000}.Day{day:00}";
     var instance = typeof(Program).Assembly.CreateInstance(typeName) as ISolution
         ?? throw new InvalidOperationException($"Failed to create type: {typeName}.");
     return instance;
+}
+
+static InputProvider BuildInputProvider()
+{
+    var session = Environment.GetEnvironmentVariable("AOC_SESSION")
+        ?? throw new ApplicationException("The environment variable AOC_SESSION must be set.");
+    var inputProvider = new InputProvider(session);
+    return inputProvider;
 }
 
 static string GetSolutionName(ISolution solution)
