@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2024;
 
-[AocSolution("Historian Hysteria")]
+[AocPuzzle("Historian Hysteria")]
 internal class Day01 : ISolution
 {
     public SolutionResult Solve(string input)
