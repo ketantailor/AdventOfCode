@@ -1,11 +1,10 @@
 ﻿namespace AdventOfCode.Year2022;
 
-[AocPuzzle("Rock Paper Scissors")]
+[AocPuzzle("Rock Paper Scissors", Solution1 = "12458", Solution2 = "12683")]
 internal class Day02 : ISolution
 {
     public SolutionResult Solve(string input)
     {
-        
         var part1 = CalculatePart1(input);
         var part2 = CalculatePart2(input);
         return new SolutionResult(part1.ToString(), part2.ToString());

@@ -7,6 +7,7 @@ This repo contains my solutions for the [Advent of Code](https://adventofcode.co
 ## Years
 
 - [![2024](https://img.shields.io/badge/2024-11_★-ffd700)](https://adventofcode.com/2024)
+- [![2022](https://img.shields.io/badge/2022-12_★-ffd700)](https://adventofcode.com/2022)
 
 ## Usage
 

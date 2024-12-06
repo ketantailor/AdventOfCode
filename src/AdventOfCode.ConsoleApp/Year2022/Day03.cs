@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2022;
 
-[AocPuzzle("Rucksack Reorganization")]
+[AocPuzzle("Rucksack Reorganization", Solution1 = "7737", Solution2 = "2697")]
 public class Day03 : ISolution
 {
     public SolutionResult Solve(string input)
