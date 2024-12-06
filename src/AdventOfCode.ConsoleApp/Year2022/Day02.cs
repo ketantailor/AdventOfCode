@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2022;
 
-[AocSolution("Rock Paper Scissors")]
+[AocPuzzle("Rock Paper Scissors")]
 internal class Day02 : ISolution
 {
     public SolutionResult Solve(string input)

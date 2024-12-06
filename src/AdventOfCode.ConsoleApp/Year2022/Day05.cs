@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2022;
 
-[AocSolution("Supply Stacks")]
+[AocPuzzle("Supply Stacks")]
 public class Day05 : ISolution
 {
     public SolutionResult Solve(string input)

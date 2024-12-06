@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2022;
 
-[AocSolution("Test Solution")]
+[AocPuzzle("Test Solution")]
 internal class Day00 : ISolution
 {
     public SolutionResult Solve(string input)

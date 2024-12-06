@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2022;
 
-[AocSolution("Calorie Counting")]
+[AocPuzzle("Calorie Counting")]
 internal class Day01 : ISolution
 {
     public SolutionResult Solve(string input)

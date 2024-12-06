@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2022;
 
-[AocSolution("Rucksack Reorganization")]
+[AocPuzzle("Rucksack Reorganization")]
 public class Day03 : ISolution
 {
     public SolutionResult Solve(string input)
@@ -82,5 +82,4 @@ public class Day03 : ISolution
 
         throw new InvalidOperationException($"Rucksacks: {rucksackA}, {rucksackB}, {rucksackC}");
     }
-
 }
