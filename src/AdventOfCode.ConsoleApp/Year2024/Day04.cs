@@ -5,7 +5,7 @@ internal class Day04 : ISolution
 {
     public SolutionResult Solve(string input)
     {
-        var grid = ToCharArray(input);
+        var grid = Common.ToCharArray(input);
 
         var part1 = FindWords(grid, "XMAS");
         var part2 = FindXmas(grid);
@@ -28,36 +28,10 @@ internal class Day04 : ISolution
             MXMXAXMASX
             """.Trim();
 
-        var grid = ToCharArray(input);
+        var grid = Common.ToCharArray(input);
 
         Console.WriteLine(FindWords(grid, "XMAS"));
         Console.WriteLine(FindXmas(grid));
-    }
-
-    private static char[,] ToCharArray(string input)
-    {
-        var lines = input
-            .Split('\n')
-            .Select(s => s.Trim())
-            .Where(s => !string.IsNullOrWhiteSpace(s))
-            .ToArray();
-
-        var xmax = lines.Max(l => l.Length);
-        var ymax = lines.Length;
-
-        var grid = new char[xmax, ymax];
-
-        for (var x = 0; x < xmax; x++)
-        {
-            for (var y = 0; y < ymax; y++)
-            {
-                var l = lines[y];
-                var c = l[x];
-                grid[x, y] = c;
-            }
-        }
-
-        return grid;
     }
 
     private static int FindWords(char[,] grid, string searchText)
