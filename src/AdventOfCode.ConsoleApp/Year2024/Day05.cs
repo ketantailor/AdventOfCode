@@ -12,7 +12,7 @@ internal class Day05 : ISolution
             .ToArray();
 
         var part1 = SumCorrectQueues(lines);
-        var part2 = 0;
+        var part2 = SumCorrectedQueues(lines);
         return new SolutionResult(part1.ToString(), part2.ToString());
     }
 
@@ -56,6 +56,7 @@ internal class Day05 : ISolution
             .ToArray();
 
         Console.WriteLine(SumCorrectQueues(lines));
+        Console.WriteLine(SumCorrectedQueues(lines));
     }
 
     private static int SumCorrectQueues(string[] lines)
@@ -65,13 +66,21 @@ internal class Day05 : ISolution
 
         var sum = queues
             .Where(q => CheckQueue(rules, q))
-            .Select(q =>
-            {
-                var idx = (q.Length - 1) / 2;
-                var value = q[idx];
-                return value;
-            })
-            .Sum();
+            .Sum(q => q[q.Length / 2]);
+
+        return sum;
+    }
+
+    private static int SumCorrectedQueues(string[] lines)
+    {
+        var rules = GetRules(lines);
+        var queues = GetQueues(lines);
+        var comparer = new QueueItemComparer(rules);
+
+        var sum = queues
+            .Where(q => !CheckQueue(rules, q))
+            .Select(q => CorrectQueue(comparer, q))
+            .Sum(q => q[q.Length / 2]);
 
         return sum;
     }
@@ -119,5 +128,29 @@ internal class Day05 : ISolution
         return true;
     }
 
+    private static int[] CorrectQueue(IComparer<int> comparer, int[] queue)
+    {
+        return queue
+            .OrderBy(q => q, comparer)
+            .ToArray();
+    }
+
     private record Rule(int First, int Second);
+
+    private class QueueItemComparer : IComparer<int>
+    {
+        private readonly Rule[] _rules;
+
+        public QueueItemComparer(Rule[] rules)
+        {
+            _rules = rules;
+        }
+
+        public int Compare(int x, int y)
+        {
+            if (_rules.Any(r => r.First == x && r.Second == y)) return -1;
+            if (_rules.Any(r => r.First == y && r.Second == x)) return 1;
+            return 0;
+        }
+    }
 }
