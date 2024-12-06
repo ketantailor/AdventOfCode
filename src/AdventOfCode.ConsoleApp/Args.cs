@@ -9,6 +9,7 @@ public class Args
         _args = args;
 
         ShowHelp = _args.Length == 0 || _args.Contains("-h") || _args.Contains("--help");
+        Verify = _args.Contains("--verify");
 
         if (!ShowHelp)
         {
@@ -31,6 +32,7 @@ public class Args
     }
 
     public bool ShowHelp { get; private set; }
+    public bool Verify { get; private set; }
 
     public int? Day { get; private set; }
     public int Year { get; private set; }

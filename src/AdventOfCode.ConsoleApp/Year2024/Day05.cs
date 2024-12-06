@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2024;
 
-[AocPuzzle("Print Queue")]
+[AocPuzzle("Print Queue", Solution1 = "4662", Solution2 = "5900")]
 internal class Day05 : ISolution
 {
     public SolutionResult Solve(string input)

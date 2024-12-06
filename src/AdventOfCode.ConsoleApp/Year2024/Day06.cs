@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2024;
 
-[AocPuzzle("Guard Gallivant")]
+[AocPuzzle("Guard Gallivant", Solution1 = "4696")]
 internal class Day06 : ISolution
 {
     public SolutionResult Solve(string input)

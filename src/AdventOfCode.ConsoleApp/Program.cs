@@ -29,31 +29,31 @@ static async Task MainImpl()
 
     if (argsObj.Day == null)
     {
-        await RunSolutions(inputProvider, argsObj.Year);
+        await RunSolutions(inputProvider, argsObj.Year, argsObj.Verify);
     }
     else
     {
-        await RunSolution(inputProvider, argsObj.Year, argsObj.Day.Value);
+        await RunSolution(inputProvider, argsObj.Year, argsObj.Day.Value, argsObj.Verify);
     }
 }
 
 
-static async Task RunSolutions(InputProvider inputProvider, int year)
+static async Task RunSolutions(InputProvider inputProvider, int year, bool verify)
 {
     try
     {
         for (var day = 0; day <= 24; day++)
         {
-            await RunSolution(inputProvider, year, day);
+            await RunSolution(inputProvider, year, day, verify);
         }
     }
     catch (InvalidOperationException)
     {
-        return;
+        // do nothing
     }
 }
 
-static async Task RunSolution(InputProvider inputProvider, int year, int day)
+static async Task RunSolution(InputProvider inputProvider, int year, int day, bool verify)
 {
     var solution = BuildSolution(year, day);
     var input = day > 0 ? await inputProvider.GetInput(year, day) : "";
@@ -64,7 +64,46 @@ static async Task RunSolution(InputProvider inputProvider, int year, int day)
 
     var result = solution.Solve(input);
 
-    Log.Info($" --> Part1 = {result.Part1}, Part2 = {result.Part2} (completed in {stopwatch.ElapsedMilliseconds:n0}ms)");
+    Log.Info($" --> Part1 = {result.Part1}, Part2 = {result.Part2} (completed in {stopwatch.ElapsedMilliseconds:n0}ms)", false);
+    Log.Info();
+
+    if (verify)
+    {
+        var attr = solution.GetType().GetCustomAttribute<AocPuzzleAttribute>();
+        if (attr?.Solution1 != null)
+        {
+            Console.Write("\tPart1: ");
+            if (result.Part1 == attr.Solution1)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Passed");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Failed: expected = {attr.Solution1}, actual = {result.Part1}");
+                Console.ResetColor();
+            }
+        }
+        if (attr?.Solution2 != null)
+        {
+            Console.Write("\tPart2: ");
+            if (result.Part2 == attr.Solution2)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Passed");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Failed: expected = {attr.Solution2}, actual = {result.Part2}");
+                Console.ResetColor();
+            }
+        }
+    }
+
 }
 
 static ISolution BuildSolution(int year, int day)
