@@ -4,9 +4,12 @@
 
 This repo contains my solutions for the [Advent of Code](https://adventofcode.com/) challenge. All solutions are implemented in C#.
 
-Year     | Stars
--------- | ----
-**2024** | 11⭐
+Year     | Stars&nbsp;
+-------- | ----:
+**2024** | 11 ⭐
+**2022** | 12 ⭐
+**2019** | 4 ⭐
+**2015** | 12 ⭐
 
 ## Usage
 
