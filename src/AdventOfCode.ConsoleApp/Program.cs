@@ -58,13 +58,13 @@ static async Task RunSolution(InputProvider inputProvider, int year, int day, bo
     var solution = BuildSolution(year, day);
     var input = day > 0 ? await inputProvider.GetInput(year, day) : "";
 
-    Log.Info($"{year:0000}.{day:00}: {GetSolutionName(solution)}", false);
+    Log.Info($"{year:0000}.{day:00}: {GetSolutionName(solution)} ", false);
 
     var stopwatch = Stopwatch.StartNew();
 
     var result = solution.Solve(input);
 
-    Log.Info($" --> Part1 = {result.Part1}, Part2 = {result.Part2} (completed in {stopwatch.ElapsedMilliseconds:n0}ms)", false);
+    Log.Info($"--> Part1 = {result.Part1}, Part2 = {result.Part2} (completed in {stopwatch.ElapsedMilliseconds:n0}ms)", false);
     Log.Info();
 
     if (verify)
