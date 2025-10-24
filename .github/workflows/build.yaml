@@ -4,15 +4,21 @@
 name: Build
 
 env:
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
-  
-on: [push]
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - '**.cs'
+    - '**.csproj'
+    - '**.sln'
+    - '.github/workflows/**'
 
 jobs:
-
   build:
-    
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -24,15 +30,15 @@ jobs:
     steps:
     
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v5
     
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-    
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 8.0.x
+
     - name: Restore
-      run: |
-        dotnet restore src/AdventOfCode.ConsoleApp --verbosity:minimal
+      run: dotnet restore src/AdventOfCode.sln --verbosity minimal
     
     - name: Build
-      run: |
-        dotnet build src/AdventOfCode.ConsoleApp --configuration Release --verbosity:minimal
+      run: dotnet build src/AdventOfCode.sln --configuration Release --no-restore --verbosity minimal
