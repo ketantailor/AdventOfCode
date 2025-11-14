@@ -36,7 +36,7 @@ jobs:
         dotnet-version: 10.0.x
 
     - name: Restore
-      run: dotnet restore src/AdventOfCode.sln --verbosity minimal
+      run: dotnet restore src/AdventOfCode.slnx --verbosity minimal
     
     - name: Build
-      run: dotnet build src/AdventOfCode.sln --configuration Release --no-restore --verbosity minimal
+      run: dotnet build src/AdventOfCode.slnx --configuration Release --no-restore --verbosity minimal
