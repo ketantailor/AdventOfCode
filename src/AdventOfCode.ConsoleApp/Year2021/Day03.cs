@@ -81,7 +81,7 @@ internal class Day03 : ISolution
                 filteredReports = ones;
         }
 
-        return filteredReports.Select(ConvertToInt).Sum();
+        return ConvertToInt(filteredReports.Single());
     }
 
     private static int CalculateCO2ScrubberRating(string[] reports)
@@ -111,7 +111,7 @@ internal class Day03 : ISolution
                 filteredReports = zeros;
         }
 
-        return filteredReports.Select(ConvertToInt).Sum();
+        return ConvertToInt(filteredReports.Single());
     }
 
     private static int ConvertToInt(string s)
@@ -137,5 +137,4 @@ internal class Day03 : ISolution
             result *= x;
         return result;
     }
-
 }
