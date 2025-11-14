@@ -33,32 +33,28 @@ static async Task MainImpl()
     }
     else
     {
-        await RunSolution(inputProvider, argsObj.Year, argsObj.Day.Value, argsObj.Verify);
+        var solution = BuildSolution(argsObj.Year, argsObj.Day.Value);
+        if (solution != null)
+            await RunSolution(inputProvider, solution, argsObj.Year, argsObj.Day.Value, argsObj.Verify);
     }
 }
 
 
 static async Task RunSolutions(InputProvider inputProvider, int year, bool verify)
 {
-    try
+    for (var day = 1; day <= 24; day++)
     {
-        for (var day = 0; day <= 24; day++)
-        {
-            await RunSolution(inputProvider, year, day, verify);
-        }
-    }
-    catch (InvalidOperationException)
-    {
-        // do nothing
+        var solution = BuildSolution(year, day);
+        if (solution == null) break;
+        await RunSolution(inputProvider, solution, year, day, verify);
     }
 }
 
-static async Task RunSolution(InputProvider inputProvider, int year, int day, bool verify)
+static async Task RunSolution(InputProvider inputProvider, ISolution solution, int year, int day, bool verify)
 {
-    var solution = BuildSolution(year, day);
     var input = day > 0 ? await inputProvider.GetInput(year, day) : "";
 
-    Log.Info($"{year:0000}.{day:00}: {GetSolutionName(solution)} ", false);
+    Log.Info($"{year:0000}.{day:00}: \x1B[1m{GetSolutionName(solution)}\x1B[0m ", false);
 
     var stopwatch = Stopwatch.StartNew();
 
@@ -106,11 +102,10 @@ static async Task RunSolution(InputProvider inputProvider, int year, int day, bo
 
 }
 
-static ISolution BuildSolution(int year, int day)
+static ISolution? BuildSolution(int year, int day)
 {
     var typeName = $"AdventOfCode.Year{year:0000}.Day{day:00}";
-    var instance = typeof(Program).Assembly.CreateInstance(typeName) as ISolution
-        ?? throw new InvalidOperationException($"Failed to create type: {typeName}.");
+    var instance = typeof(Program).Assembly.CreateInstance(typeName) as ISolution;
     return instance;
 }
 
