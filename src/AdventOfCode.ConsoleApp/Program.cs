@@ -27,7 +27,14 @@ static async Task MainImpl()
 
     var inputProvider = BuildInputProvider();
 
-    if (argsObj.Day == null)
+    if (argsObj.RunAll)
+    {
+        for (var year = 2015; year <= DateTime.Now.Year; year++)
+        {
+            await RunSolutions(inputProvider, year, argsObj.Verify);
+        }
+    }
+    else if (argsObj.Day == null)
     {
         await RunSolutions(inputProvider, argsObj.Year, argsObj.Verify);
     }

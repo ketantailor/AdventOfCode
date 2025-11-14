@@ -9,9 +9,10 @@ public class Args
         _args = args;
 
         ShowHelp = _args.Length == 0 || _args.Contains("-h") || _args.Contains("--help");
+        RunAll = _args.Contains("--all");
         Verify = _args.Contains("--verify");
 
-        if (!ShowHelp)
+        if (!ShowHelp && !RunAll)
         {
             var yearAndDay = _args.FirstOrDefault(a => !a.StartsWith("-"))
                 ?? throw new ApplicationException("Year and Day must be specified.");
@@ -32,6 +33,7 @@ public class Args
     }
 
     public bool ShowHelp { get; private set; }
+    public bool RunAll { get; private set; }
     public bool Verify { get; private set; }
 
     public int? Day { get; private set; }
