@@ -10,7 +10,7 @@ internal class Day04 : ISolution
         var part1 = FindWords(grid, "XMAS");
         var part2 = FindXmas(grid);
         
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     internal static void Test()

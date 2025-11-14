@@ -13,7 +13,7 @@ internal class Day01 : ISolution
 
         var part1 = SolvePart1(lines);
         var part2 = SolvePart2(lines);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static int SolvePart1(string[] lines)

@@ -13,7 +13,7 @@ public class Day04 : ISolution
         var part1 = CalculatePart1(lines);
         var part2 = CalculatePart2(lines);
 
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static int CalculatePart1(string[] lines)

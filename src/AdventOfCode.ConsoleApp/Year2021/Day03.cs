@@ -18,7 +18,7 @@ internal class Day03 : ISolution
         var co2 = CalculateCO2ScrubberRating(lines);
         var solution2 = oxygen * co2;
 
-        return new SolutionResult(powerConsumption.ToString(), solution2.ToString());
+        return new SolutionResult(powerConsumption, solution2);
     }
 
     private static (int, int) CalculateGammaAndEpsilon(string[] reports)

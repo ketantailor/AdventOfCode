@@ -7,7 +7,7 @@ internal class Day01 : ISolution
     {
         var part1 = GetFloor(input);
         var part2 = StepsToBasement(input);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static int GetFloor(string directions)

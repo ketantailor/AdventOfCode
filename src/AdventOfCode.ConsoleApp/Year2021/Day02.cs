@@ -41,6 +41,6 @@ internal class Day02 : ISolution
         var sum1 = hpos * depth1;
         var sum2 = hpos * depth2;
 
-        return new SolutionResult(sum1.ToString(), sum2.ToString());
+        return new SolutionResult(sum1, sum2);
     }
 }

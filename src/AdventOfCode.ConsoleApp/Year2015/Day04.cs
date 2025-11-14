@@ -11,7 +11,7 @@ internal class Day04 : ISolution
         input = input.Trim();
         var part1 = FindFiveZeros(input);
         var part2 = FindSixZeros(input);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static int FindFiveZeros(string key)

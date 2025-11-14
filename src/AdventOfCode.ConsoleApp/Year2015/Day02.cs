@@ -21,7 +21,7 @@ internal class Day02 : ISolution
             .Select(t => GetRibbonLength(t.l, t.w, t.h))
             .Sum();
 
-        return new SolutionResult(totalArea.ToString(), totalRibbonLength.ToString());
+        return new SolutionResult(totalArea, totalRibbonLength);
     }
 
     private static (int l, int w, int h) ExtractDimensions(string lwh)

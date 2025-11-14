@@ -7,7 +7,7 @@ internal class Day01 : ISolution
     {
         var part1 = GetMaxCalories(input);
         var part2 = GetSumOfTopThreeCalories(input);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     public static IEnumerable<int> GetAllCalories(string input)

@@ -9,7 +9,7 @@ public class Day03 : ISolution
     {
         var part1 = GetHouseDeliveries(input).Count;
         var part2 = GetHouseDeliveriesForTwo(input).Count;
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static IDictionary<string, int> GetHouseDeliveries(string route)

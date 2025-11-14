@@ -17,7 +17,7 @@ internal class Day05 : ISolution
         var isNice1Count = lines.Count(IsNice1);
         var isNice2Count = lines.Count(IsNice2);
 
-        return new SolutionResult(isNice1Count.ToString(), isNice2Count.ToString());
+        return new SolutionResult(isNice1Count, isNice2Count);
     }
 
     public static bool IsNice1(string s)

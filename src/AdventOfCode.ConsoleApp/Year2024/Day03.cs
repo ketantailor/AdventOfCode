@@ -9,7 +9,7 @@ internal class Day03 : ISolution
     {
         var part1 = ScanAndRun1(input);
         var part2 = ScanAndRun2(input);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     internal static void Test()

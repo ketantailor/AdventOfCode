@@ -7,7 +7,7 @@ public class Day06 : ISolution
     {
         var part1 = FindStartOfMarker(input, 4);
         var part2 = FindStartOfMarker(input, 14);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static int FindStartOfMarker(string input, int markerLength)

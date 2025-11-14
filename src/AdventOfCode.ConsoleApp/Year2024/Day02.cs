@@ -13,7 +13,7 @@ internal class Day02 : ISolution
 
         var part1 = lines.Where(CheckIsSafe).Count();
         var part2 = lines.Where(CheckIsSafeDampened).Count();
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     internal static void Test1()

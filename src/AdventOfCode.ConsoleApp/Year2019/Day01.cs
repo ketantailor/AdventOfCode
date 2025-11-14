@@ -20,7 +20,7 @@ internal class Day01 : ISolution
             .Select(GetFuelReqs2)
             .Sum();
 
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static double GetFuelReqs(double mass)

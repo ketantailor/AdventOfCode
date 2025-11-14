@@ -13,7 +13,7 @@ internal class Day05 : ISolution
 
         var part1 = SumCorrectQueues(lines);
         var part2 = SumCorrectedQueues(lines);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     internal static void Test()

@@ -10,16 +10,16 @@ internal class Day02 : ISolution
         return new SolutionResult(part1, part2);
     }
 
-    private static string SolvePart1(string input)
+    private static int SolvePart1(string input)
     {
         var codes = input.Split(',').Select(int.Parse).ToArray();
         codes[1] = 12;
         codes[2] = 2;
         var processedCodes = Execute(codes);
-        return processedCodes.First().ToString();
+        return processedCodes.First();
     }
 
-    private static string SolvePart2(string input)
+    private static int SolvePart2(string input)
     {
         for (var noun = 0; noun <= 99; noun++)
         {
@@ -32,7 +32,7 @@ internal class Day02 : ISolution
                 if (processedCodes[0] == 19690720)
                 {
                     var answer = 100 * noun + verb;
-                    return answer.ToString();
+                    return answer;
                 }
             }
         }

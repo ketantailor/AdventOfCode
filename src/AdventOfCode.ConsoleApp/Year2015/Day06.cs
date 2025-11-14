@@ -13,7 +13,7 @@ internal class Day06 : ISolution
 
         var part1 = LightsOn1(lines);
         var part2 = LightsOn2(lines);
-        return new SolutionResult(part1.ToString(), part2.ToString());
+        return new SolutionResult(part1, part2);
     }
 
     private static int LightsOn1(IEnumerable<string> instructions)
