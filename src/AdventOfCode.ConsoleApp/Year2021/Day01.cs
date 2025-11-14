@@ -22,11 +22,9 @@ internal class Day01 : ISolution
 
         var increased = 0;
 
-        for (var i = 0; i < depths.Length; i++)
+        for (var i = 1; i < depths.Length; i++)
         {
-            var status = i == 0 ? "n/a" : depths[i] < depths[i - 1] ? "decreased" : "increased";
-
-            if (i > 0 && depths[i] > depths[i - 1])
+            if (depths[i] > depths[i - 1])
                 increased++;
         }
 
@@ -39,17 +37,12 @@ internal class Day01 : ISolution
 
         var increased = 0;
 
-        for (var i = 0; i < depths.Length - 2; i++)
+        for (var i = 1; i < depths.Length - 2; i++)
         {
-            var status = "n/a";
-            if (i != 0)
-            {
-                var prevSum = depths[i - 1] + depths[i] + depths[i + 1];
-                var currSum = depths[i] + depths[i + 1] + depths[i + 2];
-                status = prevSum > currSum ? "decreased" : "increased";
-                if (currSum > prevSum)
-                    increased++;
-            }
+            var prevSum = depths[i - 1];
+            var currSum = depths[i + 2];
+            if (currSum > prevSum)
+                increased++;
         }
 
         return increased;
