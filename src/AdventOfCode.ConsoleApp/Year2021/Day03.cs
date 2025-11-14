@@ -14,13 +14,9 @@ internal class Day03 : ISolution
         var (gammaVal, epsilonVal) = CalculateGammaAndEpsilon(lines);
         var powerConsumption = gammaVal * epsilonVal;
 
-        Console.WriteLine($"lines={lines.Length}, gamma={gammaVal}, epsilon={epsilonVal}, powerConsumption={powerConsumption}");
-
         var oxygen = CalculateOxygenGeneratorRating(lines);
         var co2 = CalculateCO2ScrubberRating(lines);
         var solution2 = oxygen * co2;
-
-        Console.WriteLine($"oxygen={oxygen}, co2={co2}, solution2={solution2}");
 
         return new SolutionResult(powerConsumption.ToString(), solution2.ToString());
     }
