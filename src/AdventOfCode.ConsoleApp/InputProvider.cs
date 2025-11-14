@@ -33,6 +33,7 @@ internal class InputProvider : IDisposable
         {
             BaseAddress = new Uri("https://adventofcode.com/"),
         };
+        _client.DefaultRequestHeaders.UserAgent.ParseAdd(".NET (github.com/ketantailor/AdventOfCode)");
     }
 
     public async Task<string> GetInput(int year, int day)

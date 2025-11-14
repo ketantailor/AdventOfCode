@@ -29,3 +29,11 @@ export AOC_SESSION="<session_token>"
 cd ~/Git/AdventOfCode
 dotnet run --project src/AdventOfCode.ConsoleApp -c release -- 2024
 ```
+
+
+## Notes
+
+This project follows the [automation guidelines](https://www.reddit.com/r/adventofcode/wiki/faqs/automation) on the [/r/adventofcode](https://www.reddit.com/r/adventofcode) community wiki. Specifically:
+- Once inputs are downloaded, they are cached locally (InputProvider.GetInput())
+- The User-Agent header in InputProvider is set to the name of this repo.
+- There is no polling implemented in this repository for which throttling would be required.
