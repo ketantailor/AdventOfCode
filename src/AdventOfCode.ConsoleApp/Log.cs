@@ -14,26 +14,42 @@ internal static class Log
         }
     }
 
-    public static void Debug(string line)
+    public static void Debug(string line, bool newLine = true)
     {
-        WriteLine(line, ConsoleColor.DarkGray);
+        Write(line, ConsoleColor.DarkGray, newLine);
     }
 
     public static void Warn(string line)
     {
-        WriteLine(line, ConsoleColor.Yellow);
+        Write(line, ConsoleColor.Yellow);
     }
 
     public static void Error(string line)
     {
-        WriteLine(line, ConsoleColor.Red);
+        Write(line, ConsoleColor.Red);
     }
 
-    private static void WriteLine(string line, ConsoleColor color)
+    public static void Write()
+    {
+        Write("");
+    }
+
+    public static void Write(string line, bool newLine = true)
+    {
+        if (newLine)
+            Console.WriteLine(line);
+        else
+            Console.Write(line);
+    }
+
+    public static void Write(string line, ConsoleColor color, bool newLine = true)
     {
         Console.ForegroundColor = color;
 
-        Console.WriteLine(line);
+        if (newLine)
+            Console.WriteLine(line);
+        else
+            Console.Write(line);
 
         Console.ResetColor();
     }

@@ -60,53 +60,41 @@ static async Task RunSolutions(InputProvider inputProvider, int year, bool verif
 static async Task RunSolution(InputProvider inputProvider, ISolution solution, int year, int day, bool verify)
 {
     var input = day > 0 ? await inputProvider.GetInput(year, day) : "";
+    var attr = solution.GetType().GetCustomAttribute<AocPuzzleAttribute>()
+        ?? throw new InvalidOperationException($"Solution for {year:0000}.{day:00} doesn't have AocPuzzleAttribute set.");
 
-    Log.Info($"{year:0000}.{day:00}: \x1B[1m{GetSolutionName(solution)}\x1B[0m ", false);
+    Log.Write($"{year:0000}.{day:00}:", false);
+    Log.Write($" {attr.Name}", ConsoleColor.DarkCyan);
 
     var stopwatch = Stopwatch.StartNew();
 
     var result = solution.Solve(input);
 
-    Log.Info($"--> Part1 = {result.Part1}, Part2 = {result.Part2} (completed in {stopwatch.ElapsedMilliseconds:n0}ms)", false);
-    Log.Info();
+    var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
 
+    LogPartResult("Part 1", result.Part1, attr.Solution1, verify);
+    LogPartResult("Part 2", result.Part2, attr.Solution2, verify);
+
+    Log.Write($"Completed in {elapsedMilliseconds:n0}ms", ConsoleColor.DarkGray);
+    Log.Write();
+}
+
+static void LogPartResult(string prefix, string result, string? expected, bool verify)
+{
+    Log.Write($"  {prefix}: {result}", false);
     if (verify)
     {
-        var attr = solution.GetType().GetCustomAttribute<AocPuzzleAttribute>();
-        if (attr?.Solution1 != null)
+        if (result == expected)
         {
-            Console.Write("\tPart1: ");
-            if (result.Part1 == attr.Solution1)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Passed");
-                Console.ResetColor();
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Failed: expected = {attr.Solution1}, actual = {result.Part1}");
-                Console.ResetColor();
-            }
+            Log.Write(" Passed", ConsoleColor.Green, false);
         }
-        if (attr?.Solution2 != null)
+        else
         {
-            Console.Write("\tPart2: ");
-            if (result.Part2 == attr.Solution2)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Passed");
-                Console.ResetColor();
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Failed: expected = {attr.Solution2}, actual = {result.Part2}");
-                Console.ResetColor();
-            }
+            Log.Write($" Failed: expected = {expected}", ConsoleColor.Red, false);
+            Environment.ExitCode = 1;
         }
     }
-
+    Log.Write("");
 }
 
 static ISolution? BuildSolution(int year, int day)
@@ -122,11 +110,4 @@ static InputProvider BuildInputProvider()
         ?? throw new ApplicationException("The environment variable AOC_SESSION must be set.");
     var inputProvider = new InputProvider(session);
     return inputProvider;
-}
-
-static string GetSolutionName(ISolution solution)
-{
-    return solution.GetType()
-        .GetCustomAttribute<AocPuzzleAttribute>()
-        ?.Name ?? "";
 }
