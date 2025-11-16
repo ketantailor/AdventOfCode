@@ -41,9 +41,11 @@ public class Day01_Initial : ISolution
 
         for (var i = 1; i < depths.Length - 2; i++)
         {
-            var prevSum = depths[i - 1];
-            var currSum = depths[i + 2];
-            if (currSum > prevSum)
+            // compare the entering element of the new 3-measurement window
+            // with the leaving element of the previous window
+            var prevDepth = depths[i - 1];
+            var nextDepth = depths[i + 2];
+            if (nextDepth > prevDepth)
                 increased++;
         }
 
@@ -72,6 +74,8 @@ public class Day01_Optimised : ISolution
             b = c;
             c = d;
             d = Utils.ReadNextInt(input, ref index);
+            if (d < 0)  // no more ints to read
+                break;
 
             if (iteration > 0)
             {
