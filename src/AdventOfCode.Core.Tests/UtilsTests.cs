@@ -4,7 +4,7 @@
 public class UtilsTests
 {
     [Test]
-    public void ReadNextInt_IndexOutOfBounds_ReturnsZero()
+    public void ReadNextInt_IndexOutOfBounds_ReturnsMinusOne()
     {
         var input = "1234";
         var index = 5;
@@ -13,7 +13,20 @@ public class UtilsTests
         var rv = Utils.ReadNextInt(input, ref index);
 
 
-        Assert.That(rv, Is.EqualTo(0));
+        Assert.That(rv, Is.EqualTo(-1));
+    }
+
+    [Test]
+    public void ReadNextInt_EmptyString_ReturnsMinusOne()
+    {
+        var input = "";
+        var index = 5;
+
+
+        var rv = Utils.ReadNextInt(input, ref index);
+
+
+        Assert.That(rv, Is.EqualTo(-1));
     }
 
     [Test]

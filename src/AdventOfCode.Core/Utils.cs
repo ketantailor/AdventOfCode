@@ -4,13 +4,11 @@ internal static class Utils
 {
     internal static int ReadNextInt(ReadOnlySpan<char> input, ref int index)
     {
-        if (index >= input.Length)
-            return 0;
+        static bool isWhitespace(char c) => c == '\n' || c == '\r' || c == ' ';
+        static bool isDigit(char c) => c >= '0' && c <= '9';
 
-        Predicate<char> isWhitespace = c => c == '\n' || c == '\r' || c == ' ';
-
-        // skip leading whitesapce
-        while(true)
+        // skip leading whitespace
+        while (true)
         {
             if (index >= input.Length)
                 return -1;
@@ -25,8 +23,15 @@ internal static class Utils
 
         var rv = 0;
         char c = input[index];
+
+        if (!isDigit(c))  // no int found
+            return -1;
+
         while (!isWhitespace(c))
         {
+            if (!isDigit(c))
+                break;
+
             var d = c - (int)'0';
             rv = (rv * 10) + d;
 
