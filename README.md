@@ -18,16 +18,20 @@ Windows PowerShell:
 ```powershell
 $Env:AOC_SESSION = "<session_token>"
 
-cd ~\Git\AdventOfCode
-dotnet run --project src\AdventOfCode.ConsoleApp -c release -- 2024
+cd ~\Git\AdventOfCode\src
+dotnet run --project AdventOfCode.ConsoleApp -c release -- 2024
 ```
 
 Linux Bash:
 ```bash
 export AOC_SESSION="<session_token>"
 
-cd ~/Git/AdventOfCode
-dotnet run --project src/AdventOfCode.ConsoleApp -c release -- 2024
+cd ~/Git/AdventOfCode/src
+dotnet run --project AdventOfCode.ConsoleApp -c release -- 2024
+
+# run unit tests
+dotnet test AdventOfCode.slnx --verbosity minimal
+```
 ```
 
 
