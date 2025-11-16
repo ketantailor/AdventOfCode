@@ -42,4 +42,4 @@ jobs:
       run: dotnet build src/AdventOfCode.slnx --configuration Release --no-restore --verbosity minimal
 
     - name: Test
-      run: dotnet test src/AdventOfCode.slnx --no-build --verbosity normal
+      run: dotnet test src/AdventOfCode.slnx --verbosity minimal
