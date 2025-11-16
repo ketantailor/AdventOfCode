@@ -1,4 +1,6 @@
 ﻿using AdventOfCode;
+using AdventOfCode.Core;
+
 
 Log.Info("Advent of Code by Ketan Tailor");
 Log.Info();
