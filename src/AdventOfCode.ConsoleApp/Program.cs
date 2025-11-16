@@ -24,7 +24,7 @@ static async Task MainImpl()
         return;
     }
 
-    var inputProvider = BuildInputProvider();
+    using var inputProvider = InputProvider.CreateFromEnvironmentVariable();
     var runner = new Runner(inputProvider);
 
     if (argsObj.RunAll)
@@ -35,13 +35,4 @@ static async Task MainImpl()
     {
         await runner.Run(argsObj.Year, argsObj.Day, argsObj.Verify);
     }
-}
-
-
-static InputProvider BuildInputProvider()
-{
-    var session = Environment.GetEnvironmentVariable("AOC_SESSION")
-        ?? throw new ApplicationException("The environment variable AOC_SESSION must be set.");
-    var inputProvider = new InputProvider(session);
-    return inputProvider;
 }

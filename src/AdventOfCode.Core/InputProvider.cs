@@ -10,6 +10,13 @@ public class InputProvider : IDisposable
     private readonly HttpClientHandler _handler;
     private readonly HttpClient _client;
 
+    public static InputProvider CreateFromEnvironmentVariable()
+    {
+        var session = Environment.GetEnvironmentVariable("AOC_SESSION")
+            ?? throw new ApplicationException("The environment variable AOC_SESSION must be set.");
+        return new InputProvider(session);
+    }
+
     public InputProvider(string session)
     {
         if (string.IsNullOrWhiteSpace(session))
