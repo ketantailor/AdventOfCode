@@ -33,11 +33,7 @@ public class UtilsTests
     [Test]
     public void ReadNextInt_MultiLineInput1_ReturnsZero()
     {
-        var input = """
-            123
-            456
-            789
-            """;
+        var input = "123\r\n456";
         var index = 5;
 
 
@@ -51,11 +47,7 @@ public class UtilsTests
     [Test]
     public void ReadNextInt_MultiLineInput2_ReturnsZero()
     {
-        var input = """
-            123
-            456
-            789
-            """;
+        var input = "123\r\n456";
         var index = 4;
 
 
