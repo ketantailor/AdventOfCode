@@ -41,8 +41,7 @@ public class Day01_Initial : ISolution
 
         for (var i = 1; i < depths.Length - 2; i++)
         {
-            // compare the entering element of the new 3-measurement window
-            // with the leaving element of the previous window
+            // same as (a+b+c) > (b+c+d)
             var prevDepth = depths[i - 1];
             var nextDepth = depths[i + 2];
             if (nextDepth > prevDepth)
