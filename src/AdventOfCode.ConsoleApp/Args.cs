@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode;
+﻿using AdventOfCode.Core;
+
+namespace AdventOfCode;
 
 public class Args
 {

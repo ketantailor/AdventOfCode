@@ -3,4 +3,5 @@
     <File Path="../README.md" />
   </Folder>
   <Project Path="AdventOfCode.ConsoleApp/AdventOfCode.ConsoleApp.csproj" />
+  <Project Path="AdventOfCode.Core/AdventOfCode.Core.csproj" />
 </Solution>
