@@ -1,7 +1,9 @@
 ﻿namespace AdventOfCode.Core.Year2021;
 
 [AocPuzzle("Sonar Sweep", Solution1 = "1532", Solution2 = "1571")]
-public class Day01 : ISolution
+public class Day01 : Day01_Optimised { }
+
+public class Day01_Initial : ISolution
 {
     public SolutionResult Solve(string input)
     {
@@ -46,5 +48,46 @@ public class Day01 : ISolution
         }
 
         return increased;
+    }
+}
+
+public class Day01_Optimised : ISolution
+{
+    public SolutionResult Solve(string input)
+    {
+        var part1 = 0;
+        var part2 = 0;
+
+        var a = 0;
+        var b = 0;
+        var c = 0;
+        var d = 0;
+
+        var iteration = 0;
+        var index = 0;
+
+        while (index < input.Length)
+        {
+            a = b;
+            b = c;
+            c = d;
+            d = Utils.ReadNextInt(input, ref index);
+
+            if (iteration > 0)
+            {
+                if (d > c)
+                    part1++;
+            }
+
+            if (iteration > 2)
+            {
+                if (d > a)  // same as (a+b+c) > (b+c+d)
+                    part2++;
+            }
+
+            iteration++;
+        }
+
+        return new SolutionResult(part1, part2);
     }
 }

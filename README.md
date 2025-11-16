@@ -32,12 +32,25 @@ dotnet run --project AdventOfCode.ConsoleApp -c release -- 2024
 # run unit tests
 dotnet test AdventOfCode.slnx --verbosity minimal
 ```
+
+### Benchmarks
+
+Linux Bash:
+```bash
+export AOC_SESSION="<session_token>"
+cd ~/Git/AdventOfCode/src
+
+# run all
+dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*"
+
+# run specific
+dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2021.Day01*"
 ```
 
 
 ## Notes
 
 This project follows the [automation guidelines](https://www.reddit.com/r/adventofcode/wiki/faqs/automation) on the [/r/adventofcode](https://www.reddit.com/r/adventofcode) community wiki. Specifically:
-- Once inputs are downloaded, they are cached locally (InputProvider.GetInput())
-- The User-Agent header in InputProvider is set to the name of this repo.
+- Once inputs are downloaded, they are cached locally (see InputProvider.GetInput())
+- The User-Agent header is set to the name of this repo (see InputProvider()).
 - There is no polling implemented in this repository for which throttling would be required.

@@ -2,6 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path="../README.md" />
   </Folder>
+  <Project Path="AdventOfCode.BenchmarkApp/AdventOfCode.BenchmarkApp.csproj" Id="3f6ec508-191c-47b4-8099-340026f0f5d7" />
   <Project Path="AdventOfCode.ConsoleApp/AdventOfCode.ConsoleApp.csproj" />
   <Project Path="AdventOfCode.Core.Tests/AdventOfCode.Core.Tests.csproj" />
   <Project Path="AdventOfCode.Core/AdventOfCode.Core.csproj" />
