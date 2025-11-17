@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AdventOfCode.Core.Tests.Year2021;
+﻿namespace AdventOfCode.Core.Tests.Year2021;
 
 [TestFixture]
 public class Day01Tests
