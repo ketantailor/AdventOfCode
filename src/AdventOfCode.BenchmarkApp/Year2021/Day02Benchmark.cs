@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Core;
+﻿using AdventOfCode.Core.Year2021;
 
 using BenchmarkDotNet.Attributes;
 
@@ -6,8 +6,8 @@ namespace AdventOfCode.BenchmarkApp.Year2021;
 
 public class Day02Benchmark : SolutionBenchmark
 {
-    private readonly ISolution _initial = new AdventOfCode.Core.Year2021.Day02_Initial();
-    private readonly ISolution _optimised = new AdventOfCode.Core.Year2021.Day02_Optimised();
+    private readonly Day02_Initial _initial = new();
+    private readonly Day02_Optimised _optimised = new();
 
     public Day02Benchmark() : base(2021, 2) { }
 
