@@ -83,4 +83,86 @@ public class UtilsTests
 
         Assert.That(rv, Is.EqualTo(-1));
     }
+
+
+    [Test]
+    public void ReadNextString_IndexOutOfBounds_ReturnsNull()
+    {
+        var input = "abcd";
+        var index = 5;
+
+
+        var rv = Utils.ReadNextString(input, ref index);
+
+
+        Assert.That(rv, Is.Null);
+    }
+
+    [Test]
+    public void ReadNextString_EmptyString_ReturnsNull()
+    {
+        var input = "";
+        var index = 5;
+
+
+        var rv = Utils.ReadNextString(input, ref index);
+
+
+        Assert.That(rv, Is.Null);
+    }
+
+    [Test]
+    public void ReadNextString_WithLeadingWhitespace_ReturnsExpectedValue()
+    {
+        var input = "  abc";
+        var index = 0;
+
+
+        var rv = Utils.ReadNextString(input, ref index);
+
+
+        Assert.That(rv, Is.EqualTo("abc"));
+        Assert.That(index, Is.EqualTo(5));
+    }
+
+    [Test]
+    public void ReadNextString_MultiLineInput1_ReturnsZero()
+    {
+        var input = "abc\r\ndef";
+        var index = 5;
+
+
+        var rv = Utils.ReadNextString(input, ref index);
+
+
+        Assert.That(rv, Is.EqualTo("def"));
+        Assert.That(index, Is.EqualTo(8));
+    }
+
+    [Test]
+    public void ReadNextString_MultiLineInput2_ReturnsZero()
+    {
+        var input = "abc\r\ndef";
+        var index = 4;
+
+
+        var rv = Utils.ReadNextString(input, ref index);
+
+
+        Assert.That(rv, Is.EqualTo("def"));
+        Assert.That(index, Is.EqualTo(8));
+    }
+
+    [Test]
+    public void ReadNextString_NoMoreDigits_ReturnsNull()
+    {
+        var input = "  ";
+        var index = 1;
+
+
+        var rv = Utils.ReadNextString(input, ref index);
+
+
+        Assert.That(rv, Is.Null);
+    }
 }

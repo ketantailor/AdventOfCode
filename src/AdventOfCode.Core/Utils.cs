@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Core;
+﻿using System.Text;
+
+namespace AdventOfCode.Core;
 
 internal static class Utils
 {
@@ -42,5 +44,47 @@ internal static class Utils
             c = input[index];
         }
         return rv;
+    }
+
+    internal static string? ReadNextString(ReadOnlySpan<char> input, ref int index)
+    {
+        static bool isWhitespace(char c) => c == '\n' || c == '\r' || c == ' ';
+        static bool isString(char c) => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+
+        // skip leading whitespace
+        while (true)
+        {
+            if (index >= input.Length)
+                return null;
+
+            var i = input[index];
+
+            if (isWhitespace(i))
+                index++;
+            else
+                break;
+        }
+
+        var builder = new StringBuilder();
+        char c = input[index];
+
+        if (!isString(c))  // no string found
+            return null;
+
+        while (!isWhitespace(c))
+        {
+            if (!isString(c))
+                break;
+
+            builder.Append(c);
+
+            index++;
+            if (index >= input.Length)
+                break;
+
+            c = input[index];
+        }
+        
+        return builder.ToString();
     }
 }
