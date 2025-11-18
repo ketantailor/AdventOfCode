@@ -27,24 +27,18 @@ Linux Bash:
 export AOC_SESSION="<session_token>"
 
 cd ~/Git/AdventOfCode/src
+
+# run all solutions for 2024
 dotnet run --project AdventOfCode.ConsoleApp -c release -- 2024
 
 # run unit tests
 dotnet test AdventOfCode.slnx --verbosity minimal
-```
 
-### Benchmarks
-
-Linux Bash:
-```bash
-export AOC_SESSION="<session_token>"
-cd ~/Git/AdventOfCode/src
-
-# run all
+# run all benchmarks
 dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*"
 
-# run specific
-dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2021.Day01*"
+# run 2024 benchmarks and include memory measurements
+dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2021*" --memory
 ```
 
 
