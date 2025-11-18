@@ -1,54 +1,50 @@
 ﻿
 namespace AdventOfCode.Core.Year2021;
 
-[AocPuzzle("Lanternfish", Solution1 = "352195", Solution2 = null)]
-
-internal class Day06X : ISolution
+[AocPuzzle("Lanternfish", Solution1 = "352195", Solution2 = "1600306001288")]
+internal class Day06 : ISolution
 {
     public SolutionResult Solve(string input)
     {
-        var state = input.Split(',').Select(int.Parse).ToList();
+        var currentAges = input.Split(',').Select(int.Parse).ToList();
 
-        var solution1 = Solve1(state.ToList(), 80);
-        var solution2 = Solve1(state.ToList(), 256);
+        var solution1 = Solve(currentAges, 80);
+        var solution2 = Solve(currentAges, 256);
         return new SolutionResult(solution1, solution2);
     }
 
-    private int Solve1(List<int> state, int maxDays)
+    private long Solve(List<int> state, int maxDays)
     {
         var day = 0;
 
-        while (true)
+        var ageCurrent = new long[9]; // index by age
+        var ageNext = new long[9]; // index by age
+
+        foreach (var s in state)
         {
-            day++;
-            var newFish = new List<int>();
-            for (int i = 0; i < state.Count; i++)
-            {
-                state[i]--;
-                if (state[i] < 0)
-                {
-                    state[i] = 6;
-                    newFish.Add(8);
-                }
-            }
-            state.AddRange(newFish);
-
-            //Console.WriteLine($"After {day} days: {string.Join(',', state)}");
-            //Console.WriteLine($"After {day} days: {state.Count}");
-
-            if (day == maxDays)
-            {
-                break;
-            }
+            ageCurrent[s]++;
         }
 
-        return state.Count;
-    }
+        while (day < maxDays)
+        {
+            ageNext[8] = ageCurrent[0]; // babies
+            ageNext[7] = ageCurrent[8];
+            ageNext[6] = ageCurrent[7] + ageCurrent[0]; // aged 7 + just given birth
+            for (var i = 5; i >= 0; i--)
+            {
+                ageNext[i] = ageCurrent[i + 1];
+            }
 
-    public void Test()
-    {
-        //var input = "3,4,3,1,2";
-        var input = "1";
-        Console.WriteLine(Solve(input));
+            (ageCurrent, ageNext) = (ageNext, ageCurrent);
+
+            day++;
+        }
+
+        long sum = 0;
+        foreach (var a in ageCurrent)
+        {
+            sum += a;
+        }
+        return sum;
     }
 }
