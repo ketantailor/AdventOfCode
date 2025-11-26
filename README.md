@@ -38,7 +38,7 @@ dotnet test AdventOfCode.slnx --verbosity minimal
 dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*"
 
 # run 2024 benchmarks and include memory measurements
-dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2021*" --memory
+dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2021*"
 ```
 
 
