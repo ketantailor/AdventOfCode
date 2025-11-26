@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Core.Year2021;
+﻿using System.Runtime.CompilerServices;
+
+namespace AdventOfCode.Core.Year2021;
 
 [AocPuzzle("The Treachery of Whales", Solution1 = "342534", Solution2 = "94004208")]
 public class Day07 : Day07_Optimised { }
@@ -94,6 +96,7 @@ public class Day07_Optimised : ISolution
         return sum;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static int Triangle(int i)
     {
         return i * (i + 1) / 2;
