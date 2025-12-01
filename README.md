@@ -6,6 +6,7 @@ This repo contains my solutions for the [Advent of Code](https://adventofcode.co
 
 Year     | Stars&nbsp;
 -------- | ----:
+**2025** | 2 ⭐
 **2024** | 11 ⭐
 **2022** | 12 ⭐
 **2021** | 14 ⭐
@@ -19,7 +20,7 @@ Windows PowerShell:
 $Env:AOC_SESSION = "<session_token>"
 
 cd ~\Git\AdventOfCode\src
-dotnet run --project AdventOfCode.ConsoleApp -c release -- 2024
+dotnet run --project AdventOfCode.ConsoleApp -c release -- 2025
 ```
 
 Linux Bash:
@@ -29,7 +30,7 @@ export AOC_SESSION="<session_token>"
 cd ~/Git/AdventOfCode/src
 
 # run all solutions for 2024
-dotnet run --project AdventOfCode.ConsoleApp -c release -- 2024
+dotnet run --project AdventOfCode.ConsoleApp -c release -- 2025
 
 # run unit tests
 dotnet test AdventOfCode.slnx --verbosity minimal
@@ -38,7 +39,7 @@ dotnet test AdventOfCode.slnx --verbosity minimal
 dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*"
 
 # run 2024 benchmarks and include memory measurements
-dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2021*"
+dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2024*"
 ```
 
 
