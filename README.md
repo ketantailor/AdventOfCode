@@ -29,7 +29,7 @@ export AOC_SESSION="<session_token>"
 
 cd ~/Git/AdventOfCode/src
 
-# run all solutions for 2024
+# run all solutions for 2025
 dotnet run --project AdventOfCode.ConsoleApp -c release -- 2025
 
 # run unit tests
@@ -38,8 +38,8 @@ dotnet test AdventOfCode.slnx --verbosity minimal
 # run all benchmarks
 dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*"
 
-# run 2024 benchmarks and include memory measurements
-dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2024*"
+# run 2025 benchmarks
+dotnet run --project AdventOfCode.BenchmarkApp -c Release -- --filter "*Year2025*"
 ```
 
 

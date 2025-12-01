@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace AdventOfCode.Core;
 
@@ -6,8 +7,6 @@ internal static class Utils
 {
     internal static int ReadNextInt(ReadOnlySpan<char> input, ref int index)
     {
-        static bool isWhitespace(char c) => c == '\n' || c == '\r' || c == ' ';
-        static bool isDigit(char c) => c >= '0' && c <= '9';
 
         // skip leading whitespace
         while (true)
@@ -17,7 +16,7 @@ internal static class Utils
 
             var i = input[index];
 
-            if (isWhitespace(i))
+            if (IsWhitespace(i))
                 index++;
             else
                 break;
@@ -26,12 +25,12 @@ internal static class Utils
         var rv = 0;
         char c = input[index];
 
-        if (!isDigit(c))  // no int found
+        if (!IsDigit(c))  // no int found
             return -1;
 
-        while (!isWhitespace(c))
+        while (!IsWhitespace(c))
         {
-            if (!isDigit(c))
+            if (!IsDigit(c))
                 break;
 
             var d = c - (int)'0';
@@ -46,45 +45,53 @@ internal static class Utils
         return rv;
     }
 
-    internal static string? ReadNextString(ReadOnlySpan<char> input, ref int index)
+    internal static ReadOnlySpan<char> ReadNextString(ReadOnlySpan<char> input, ref int index)
     {
-        static bool isWhitespace(char c) => c == '\n' || c == '\r' || c == ' ';
-        static bool isString(char c) => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-
         // skip leading whitespace
         while (true)
         {
             if (index >= input.Length)
-                return null;
+                return ReadOnlySpan<char>.Empty;
 
             var i = input[index];
 
-            if (isWhitespace(i))
+            if (IsWhitespace(i))
                 index++;
             else
                 break;
         }
 
-        var builder = new StringBuilder();
+        //var builder = new StringBuilder();
         char c = input[index];
 
-        if (!isString(c))  // no string found
-            return null;
+        if (!IsString(c))  // no string found
+            return ReadOnlySpan<char>.Empty;
 
-        while (!isWhitespace(c))
+        var start = index;
+        var end = index;
+        while (!IsWhitespace(c))
         {
-            if (!isString(c))
+            if (!IsString(c))
                 break;
 
-            builder.Append(c);
-
             index++;
+            end = index;
+
             if (index >= input.Length)
                 break;
 
             c = input[index];
         }
         
-        return builder.ToString();
+        return input[start..end];
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool IsWhitespace(char c) => c == '\n' || c == '\r' || c == ' ';
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool IsDigit(char c) => c >= '0' && c <= '9';
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool IsString(char c) => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }

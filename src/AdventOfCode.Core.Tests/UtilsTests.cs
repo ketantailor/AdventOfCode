@@ -95,7 +95,7 @@ public class UtilsTests
         var rv = Utils.ReadNextString(input, ref index);
 
 
-        Assert.That(rv, Is.Null);
+        Assert.That(rv.Length, Is.Zero);
     }
 
     [Test]
@@ -108,7 +108,7 @@ public class UtilsTests
         var rv = Utils.ReadNextString(input, ref index);
 
 
-        Assert.That(rv, Is.Null);
+        Assert.That(rv.Length, Is.Zero);
     }
 
     [Test]
@@ -121,7 +121,7 @@ public class UtilsTests
         var rv = Utils.ReadNextString(input, ref index);
 
 
-        Assert.That(rv, Is.EqualTo("abc"));
+        Assert.That(rv.ToString(), Is.EqualTo("abc"));
         Assert.That(index, Is.EqualTo(5));
     }
 
@@ -135,7 +135,7 @@ public class UtilsTests
         var rv = Utils.ReadNextString(input, ref index);
 
 
-        Assert.That(rv, Is.EqualTo("def"));
+        Assert.That(rv.ToString(), Is.EqualTo("def"));
         Assert.That(index, Is.EqualTo(8));
     }
 
@@ -149,7 +149,7 @@ public class UtilsTests
         var rv = Utils.ReadNextString(input, ref index);
 
 
-        Assert.That(rv, Is.EqualTo("def"));
+        Assert.That(rv.ToString(), Is.EqualTo("def"));
         Assert.That(index, Is.EqualTo(8));
     }
 
@@ -163,6 +163,6 @@ public class UtilsTests
         var rv = Utils.ReadNextString(input, ref index);
 
 
-        Assert.That(rv, Is.Null);
+        Assert.That(rv.Length, Is.Zero);
     }
 }

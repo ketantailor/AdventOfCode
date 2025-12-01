@@ -17,4 +17,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("3375d654-60e0-4929-b114-17d76e7ec868")]
 
+[assembly: InternalsVisibleTo("AdventOfCode.BenchmarkApp")]
 [assembly: InternalsVisibleTo("AdventOfCode.Core.Tests")]
